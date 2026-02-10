@@ -6,7 +6,6 @@ palmeiras-corridas/
   └──style.css
 └── js/
   └──scrypt.js
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
