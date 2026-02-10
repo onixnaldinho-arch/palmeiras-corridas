@@ -3,55 +3,45 @@ palmeiras-corridas/
 ├── corrida.html
 ├── motoristas.html
 ├── css/
+  └──style.css
 └── js/
+  └──scrypt.js
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Palmeiras Corridas</title>
   <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<header>
-  <h1>🚕 Palmeiras Corridas</h1>
-  <p>Corridas rápidas em Santa Cruz das Palmeiras</p>
-  <a href="corrida.html" class="btn">CHAMAR CORRIDA</a>
 </header>
-
 </body>
-</html>
-<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Chamar Corrida</title>
-  <link rel="stylesheet" href="lanças-carregas/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<h2>Solicitar Corrida</h2>
+  <h2>Solicitar Corrida</h2>
 
-<form id="corridaForm">
-  <input type="text" id="nome" placeholder="Nome do cliente" required>
+  <form id="corridaForm">
+    <label>Destino:</label>
+    <select id="bairroDestino">
+      <option value="">Selecione</option>
+      <option value="Bairro Próximo">Bairro Próximo</option>15
+      <option value="Bairro Médio">Bairro Médio</option>18
+      <option value="Bairro Distante">Bairro Distante</option>22
+    </select>
+  </form>
 
-  <select id="cidadeOrigem">
-    <option>Santa Cruz das Palmeiras</option>
-  </select>
+  <p>Valor da corrida: R$ <span id="valor">--</span></p>
 
-  <select id="bairroOrigem">
-    <option>Centro</option>
-    <option>Bairro Próximo</option>
-    <option>Bairro Médio</option>
-    <option>Bairro Distante</option>
-  </select>
-
-  <select id="bairroDestino">
-    <option>Bairro Próximo</option>
-    <option>Bairro Médio</option>
-    <option>Bairro Distante</option>
-  </select>
-
+  <script src="js/scripts.js"></script>
+</body>
+</html>
   <select id="pagamento">
     <option>Dinheiro</option>
     <option>PIX</option>
