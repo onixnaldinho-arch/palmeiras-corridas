@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Drivers</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .search-container { margin: 20px 0; }
+        .filter-option { margin: 0 10px; }
+        .driver-list { list-style-type: none; padding: 0; }
+        .driver-list li { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Available Drivers</h1>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search drivers..." />
+        <select id="filter" class="filter-option">
+            <option value="all">All</option>
+            <option value="available">Available</option>
+            <option value="busy">Busy</option>
+        </select>
+    </div>
+    <ul class="driver-list" id="driverList">
+        <li data-status="available">Driver 1: Available</li>
+        <li data-status="busy">Driver 2: Busy</li>
+        <li data-status="available">Driver 3: Available</li>
+        <li data-status="busy">Driver 4: Busy</li>
+    </ul>
+    <script>
+        const searchInput = document.getElementById('search');
+        const filterSelect = document.getElementById('filter');
+        const driverList = document.getElementById('driverList');
+
+        function filterDrivers() {
+            const searchText = searchInput.value.toLowerCase();
+            const filterValue = filterSelect.value;
+            const drivers = driverList.getElementsByTagName('li');
+
+            for (let i = 0; i < drivers.length; i++) {
+                const driver = drivers[i];
+                const driverName = driver.textContent.toLowerCase();
+
+                const matchesSearch = driverName.includes(searchText);
+                const matchesFilter = filterValue === 'all' || driver.dataset.status === filterValue;
+
+                if (matchesSearch && matchesFilter) {
+                    driver.style.display = '';
+                } else {
+                    driver.style.display = 'none';
+                }
+            }
+        }
+
+        searchInput.addEventListener('input', filterDrivers);
+        filterSelect.addEventListener('change', filterDrivers);
+    </script>
+</body>
+</html>
