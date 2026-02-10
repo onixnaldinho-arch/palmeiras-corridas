@@ -1,135 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palmeiras Corridas Running Tracker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palmeiras Corridas</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Palmeiras Corridas Running Tracker</h1>
-    </header>
-    <main>
-        <form id="runForm">
-            <input type="date" id="runDate" required>
-            <input type="number" id="runDistance" placeholder="Distance (km)" required>
-            <input type="number" id="runTime" placeholder="Time (min)" required>
-            <button type="submit">Register Run</button>
-        </form>
-        <button id="exportPDF">Export as PDF</button>
-        <button id="exportCSV">Export as CSV</button>
-        <div id="chartContainer">
-            <canvas id="distanceChart"></canvas>
-            <canvas id="speedChart"></canvas>
-        </div>
-        <table id="runTable">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Distance (km)</th>
-                    <th>Time (min)</th>
-                    <th>Speed (km/h)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <footer>
-            <p>Footer Content Here</p>
-        </footer>
-    </main>
-    <script>
-        const runForm = document.getElementById('runForm');
-        const runTable = document.getElementById('runTable').getElementsByTagName('tbody')[0];
-        const distanceChartCtx = document.getElementById('distanceChart').getContext('2d');
-        const speedChartCtx = document.getElementById('speedChart').getContext('2d');
-        let runs = JSON.parse(localStorage.getItem('runs')) || [];
-        const distanceChart = new Chart(distanceChartCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Distance (km)',
-                    data: [],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
-            }
-        });
-        const speedChart = new Chart(speedChartCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Speed (km/h)',
-                    data: [],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    fill: false
-                }]
-            }
-        });
-        runForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const date = new Date(runForm.runDate.value);
-            const distance = parseFloat(runForm.runDistance.value);
-            const time = parseFloat(runForm.runTime.value);
-            const speed = (distance / (time / 60)).toFixed(2);
-            const runEntry = { date, distance, time, speed };
-            runs.push(runEntry);
-            localStorage.setItem('runs', JSON.stringify(runs));
-            updateRunTable();
-            updateCharts();
-        });
-        function updateRunTable() {
-            runTable.innerHTML = '';
-            runs.forEach((run, index) => {
-                const row = runTable.insertRow();
-                row.insertCell(0).innerText = run.date.toISOString().substring(0, 10);
-                row.insertCell(1).innerText = run.distance;
-                row.insertCell(2).innerText = run.time;
-                row.insertCell(3).innerText = run.speed;
-                const actionsCell = row.insertCell(4);
-                actionsCell.innerHTML = `<button onclick="deleteRun(${index})">Delete</button>`;
-            });
-        }
-        function deleteRun(index) {
-            runs.splice(index, 1);
-            localStorage.setItem('runs', JSON.stringify(runs));
-            updateRunTable();
-            updateCharts();
-        }
-        function updateCharts() {
-            distanceChart.data.labels = runs.map(run => run.date.toISOString().substring(0, 10));
-            distanceChart.data.datasets[0].data = runs.map(run => run.distance);
-            distanceChart.update();
-            speedChart.data.labels = runs.map(run => run.date.toISOString().substring(0, 10));
-            speedChart.data.datasets[0].data = runs.map(run => run.speed);
-            speedChart.update();
-        }
-        document.getElementById('exportPDF').addEventListener('click', function() {
-            const element = document.getElementById('runTable');
-            html2pdf().from(element).save('runs.pdf');
-        });
-        document.getElementById('exportCSV').addEventListener('click', function() {
-            const csvRows = []; 
-            csvRows.push(['Date', 'Distance (km)', 'Time (min)', 'Speed (km/h)']);
-            runs.forEach(run => {
-                csvRows.push([run.date.toISOString().substring(0, 10), run.distance, run.time, run.speed]);
-            });
-            const csvString = csvRows.map(e => e.join(',')).join('\n');
-            const blob = new Blob([csvString], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', 'runs.csv');
-            a.click();
-        });
-        updateRunTable();
-        updateCharts();
-    </script>
+
+<header>
+  <h1>🚕 Palmeiras Corridas</h1>
+  <p>Corridas rápidas em Santa Cruz das Palmeiras</p>
+  <a href="corrida.html" class="btn btn-primary">CHAMAR CORRIDA</a>
+  <a href="motoristas.html" class="btn btn-secondary">VER MOTORISTAS</a>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>Bem-vindo ao Palmeiras Corridas!</h2>
+    <p>A forma mais rápida e segura de se deslocar em Santa Cruz das Palmeiras</p>
+    <div class="stats">
+      <div class="stat">
+        <h3 id="totalCorridas">0</h3>
+        <p>Corridas Realizadas</p>
+      </div>
+      <div class="stat">
+        <h3 id="motoristasAtivos">0</h3>
+        <p>Motoristas Ativos</p>
+      </div>
+      <div class="stat">
+        <h3>⭐ 4.9</h3>
+        <p>Avaliação Média</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Por que Palmeiras Corridas?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="icon">✅</span>
+        <h3>Rápido</h3>
+        <p>Chegue ao seu destino em poucos minutos</p>
+      </div>
+      <div class="feature">
+        <span class="icon">💰</span>
+        <h3>Preço Justo</h3>
+        <p>Os melhores preços da cidade</p>
+      </div>
+      <div class="feature">
+        <span class="icon">🛡️</span>
+        <h3>Seguro</h3>
+        <p>Todos os motoristas são verificados</p>
+      </div>
+      <div class="feature">
+        <span class="icon">📍</span>
+        <h3>Rastreamento</h3>
+        <p>Saiba exatamente onde seu motorista está</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2026 Palmeiras Corridas. Todos os direitos reservados.</p>
+</footer>
+
+<script src="js/script.js"></script>
 </body>
 </html>
