@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request a Ride</title>
+</head>
+<body>
+    <h1>Ride Request Form</h1>
+    <form action="/submit-ride-request" method="POST">
+        <label for="origin">Origin:</label><br>
+        <input type="text" id="origin" name="origin" required><br><br>
+
+        <label for="destination">Destination:</label><br>
+        <input type="text" id="destination" name="destination" required><br><br>
+
+        <label for="passengers">Number of Passengers:</label><br>
+        <input type="number" id="passengers" name="passengers" required min="1"><br><br>
+
+        <label for="schedule_time">Scheduled Time:</label><br>
+        <input type="datetime-local" id="schedule_time" name="schedule_time" required><br><br>
+
+        <input type="submit" value="Request Ride">
+    </form>
+
+    <h2>Ride Information</h2>
+    <div id="ride-info">
+        <!-- Ride information will be displayed here -->
+    </div>
+</body>
+</html>
