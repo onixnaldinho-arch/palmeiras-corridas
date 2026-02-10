@@ -1,24 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palmeiras Corridas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #1f1f1f;
-            color: #fff;
-        }
-        h1 {
-            color: #00ff00;
-        }
-    </style>
+    <title>Enhanced Application</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/2.9.4/Chart.min.js"></script>
 </head>
 <body>
-    <h1>🏃 Palmeiras Corridas</h1>
-    <p>Bem-vindo ao controle de corridas!</p>
+    <h1>Enhanced Application</h1>
+    
+    <!-- User Input Section -->
+    <textarea id="userInput" placeholder="Enter your data here..."></textarea>
+    <button id="saveBtn">Save</button>
+    <button id="exportPdfBtn">Export as PDF</button>
+    
+    <!-- Chart Section -->
+    <canvas id="dataChart"></canvas>
+
+    <script>
+        // LocalStorage Persistence
+        document.getElementById('saveBtn').onclick = function() {
+            const userInput = document.getElementById('userInput').value;
+            localStorage.setItem('userInput', userInput);
+            alert('Data saved!');
+        };
+
+        window.onload = function() {
+            const savedInput = localStorage.getItem('userInput');
+            if (savedInput) {
+                document.getElementById('userInput').value = savedInput;
+            }
+        };
+
+        // PDF Export Functionality
+        document.getElementById('exportPdfBtn').onclick = function() {
+            const doc = new jsPDF();
+            doc.text(document.getElementById('userInput').value, 10, 10);
+            doc.save('export.pdf');
+        };
+
+        // Data Charts
+        const ctx = document.getElementById('dataChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
