@@ -59,20 +59,20 @@ button:hover {
 function chamarWhats() {
 
     // 📱 TROQUE APENAS ESTE NÚMERO
-    const telefone = "5519986001846"; // 55 + DDD + número
-
-    const corrida = document.getElementById("corrida").value;
+    const telefone = "5519986001846"; // 55 + 19 + 986001846
+   const corrida = document.getElementById("corrida").value;
 
     if (corrida === "") {
         alert("Selecione uma corrida");
         return;
     }
 
-    const mensagem = Olá, gostaria de solicitar: ${corrida};
+    const mensagem = `Olá, gostaria de solicitar: ${corrida}`;
 
-    const url = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
 
     window.open(url, "_blank");
+}
 }
 </script>
 
