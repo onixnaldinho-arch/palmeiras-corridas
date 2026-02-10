@@ -1,4 +1,4 @@
-palmeiras-corridas/
+
 ├── index.html
 ├── corrida.html
 ├── motoristas.html
@@ -93,7 +93,7 @@ form.addEventListener("submit", (e) => {
   const valor = valorTexto.innerText.replace("💰 Valor da corrida: ", "");
 
   const mensagem = `
-🚕 PALMEIRAS CORRIDAS
+
 
 Cliente: ${nome}
 Origem: Centro
