@@ -26,7 +26,7 @@ palmeiras-corridas/
 <head>
   <meta charset="UTF-8">
   <title>Chamar Corrida</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lanças-carregas/css/style.css">
 </head>
 <body>
 
@@ -63,7 +63,7 @@ palmeiras-corridas/
   <button type="submit">ENVIAR PELO WHATSAPP</button>
 </form>
 
-<script src="js/script.js"></script>
+<script src="lanças-carregas/js/scripts.js"></script>
 </body>
 </html>
 const tabela = {
