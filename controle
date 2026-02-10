@@ -1,128 +1,80 @@
-palmeiras-corridas/
-├── index.html
-├── corrida.html
-├── motoristas.html
-├── css/
-  └──style.css
-└── js/
-  └──scrypt.js
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Palmeiras Corridas</title>
-  <link rel="stylesheet" href="css/style.css">
-</header>
-</body>
-<html>
-  <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Chamar Corrida</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Palmeiras Corridas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+h1 {
+    color: #0a3;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+}
+
+select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+button {
+    background: #0a3;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #087;
+}
+</style>
 </head>
 
 <body>
 
-  <h2>Solicitar Corrida</h2>
+<h1>🚗 Palmeiras Corridas</h1>
 
-  <form id="corridaForm">
-    <label>Destino:</label>
-    <select id="bairroDestino">
-      <option value="">Selecione</option>
-      <option value="Bairro Próximo">Bairro Próximo</option>15
-      <option value="Bairro Médio">Bairro Médio</option>18
-      <option value="Bairro Distante">Bairro Distante</option>22
-    </select>
-  </form>
+<label>Selecione a corrida</label>
+<select id="corrida">
+    <option value="">Escolha uma opção</option>
+    <option value="Corrida curta - R$10">Corrida curta - R$10</option>
+    <option value="Corrida média - R$15">Corrida média - R$15</option>
+    <option value="Corrida longa - R$20">Corrida longa - R$20</option>
+</select>
 
-  <p>Valor da corrida: R$ <span id="valor">--</span></p>
+<button onclick="chamarWhats()">Chamar no WhatsApp</button>
 
-  <script src="js/scripts.js"></script>
+<script>
+function chamarWhats() {
+
+    // 📱 TROQUE APENAS ESTE NÚMERO
+    const telefone = "5519986001846"; // 55 + DDD + número
+
+    const corrida = document.getElementById("corrida").value;
+
+    if (corrida === "") {
+        alert("Selecione uma corrida");
+        return;
+    }
+
+    const mensagem = Olá, gostaria de solicitar: ${corrida};
+
+    const url = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
+
+    window.open(url, "_blank");
+}
+</script>
+
 </body>
 </html>
-  <select id="pagamento">
-    <option>Dinheiro</option>
-    <option>PIX</option>
-    <option>Cartão</option>
-  </select>
-
-  <p id="valor">💰 Valor da corrida: R$ --</p>
-
-  <button type="submit">ENVIAR PELO WHATSAPP</button>
-</form>
-
-<script src="lanças-carregas/js/scripts.js"></script>
-</body>
-</html>
-const tabela = {
-  "Centro-Bairro Próximo": 15,
-  "Centro-Bairro Médio": 18,
-  "Centro-Bairro Distante": 22
-};
-
-const form = document.getElementById("corridaForm");
-const valorTexto = document.getElementById("valor");
-
-form.addEventListener("change", () => {
-  const origem = "Centro";
-  const destino = document.getElementById("bairroDestino").value;
-  const chave = origem + "-" + destino;
-
-  const valor = tabela[chave] || "A combinar";
-  valorTexto.innerText = "💰 Valor da corrida: R$ " + valor;
-});
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const nome = document.getElementById("nome").value;
-  const destino = document.getElementById("bairroDestino").value;
-  const pagamento = document.getElementById("pagamento").value;
-  const valor = valorTexto.innerText.replace("💰 Valor da corrida: ", "");
-
-  const mensagem = `
-
-
-Cliente: ${nome}
-Origem: Centro
-Destino: ${destino}
-Pagamento: ${pagamento}
-${valor}
-`;
-
-  const telefone = "5519986001846"; // SEU WHATSAPP
-  const url = https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)};
-
-  window.open(url, "_blank");
-});
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  padding: 20px;
-}
-
-h1, h2 {
-  color: #0a3;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-}
-
-button {
-  background: #0a3;
-  color: white;
-  border: none;
-  font-size: 16px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 15px;
-  background: #0a3;
-  color: white;
-  text-decoration: none;
-}
