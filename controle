@@ -1,12 +1,9 @@
-/palmeiras-corridas
-│
-├── index.html        (Página inicial)
-├── corrida.html      (Chamar corrida)
-├── motoristas.html   (Motoristas disponíveis)
+palmeiras-corridas/
+├── index.html
+├── corrida.html
+├── motoristas.html
 ├── css/
-│   └── style.css
 └── js/
-    └── script.js
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
